@@ -32,25 +32,27 @@ define('components/solar-system', [
                     distance : 227.9, //bln km
                     year : 687
                 },
+                // the rest have too large distance and too long rolling time to show on the screen
+                // decreased manually
                 {
                     name : 'Jupiter',
-                    distance : 778, //bln km
-                    year : 11.9 * 365.3
+                    distance : 250, //bln km
+                    year : 1000
                 },
                 {
                     name : 'Saturn',
-                    distance : 1427 , //bln km
-                    year : 29.46 * 365.3
+                    distance : 300 , //bln km
+                    year : 1150
                 },
                 {
                     name : 'Uranus',
-                    distance : 2871, //bln km
-                    year : 84 * 365.3
+                    distance : 360, //bln km
+                    year : 1220
                 },
                 {
                     name : 'Neptune',
-                    distance : 4497, //bln km
-                    year : 164.8
+                    distance : 450, //bln km
+                    year : 1460
                 }
             ]
         };
