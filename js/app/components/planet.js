@@ -18,6 +18,8 @@ define('components/planet', [
             console.dir(this.model);
         }
 
-    }
+    };
+
+    return Planet;
 
 });

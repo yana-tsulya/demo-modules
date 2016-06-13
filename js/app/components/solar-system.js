@@ -30,6 +30,7 @@ define('components/solar-system', [
             this.model.planets.forEach(function (planetData) {
                 this.planets.push(new Planet(planetData));
             }.bind(this));
+            console.dir(this.model);
         },
 
         render : function () {
@@ -37,6 +38,7 @@ define('components/solar-system', [
         }
 
 
-    }
+    };
 
+    return SolarSystem;
 });
