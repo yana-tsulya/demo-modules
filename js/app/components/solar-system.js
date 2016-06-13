@@ -9,50 +9,49 @@ define('components/solar-system', [
 ) {
 
     function SolarSystem () {
+        this.$el = $();
 
         this.model = {
             planets : [
                 {
                     name : 'Mercury',
-                    distance : 58, //bln km
-                    year : 58
+                    distance : 58,
+                    year : 58 / 365.3
                 },
                 {
                     name : 'Venus',
-                    distance : 108.2, //bln km
-                    year : 224.7
+                    distance : 108.2,
+                    year : 224.7 / 365.3
                 },
                 {
                     name : 'Earth',
-                    distance : 149.6, //bln km
-                    year : 365.3
+                    distance : 149.6,
+                    year : 365.3 / 365.3
                 },
                 {
                     name : 'Mars',
-                    distance : 227.9, //bln km
-                    year : 687
+                    distance : 227.9,
+                    year : 687 / 365.3
                 },
-                // the rest have too large distance and too long rolling time to show on the screen
-                // decreased manually
                 {
                     name : 'Jupiter',
-                    distance : 250, //bln km
-                    year : 1000
+                    distance : 778,
+                    year : 11.9
                 },
                 {
                     name : 'Saturn',
-                    distance : 300 , //bln km
-                    year : 1150
+                    distance : 1427 ,
+                    year : 29.46
                 },
                 {
                     name : 'Uranus',
-                    distance : 360, //bln km
-                    year : 1220
+                    distance : 2871,
+                    year : 84
                 },
                 {
                     name : 'Neptune',
-                    distance : 450, //bln km
-                    year : 1460
+                    distance : 4497,
+                    year : 164.8
                 }
             ]
         };
@@ -64,14 +63,41 @@ define('components/solar-system', [
     SolarSystem.prototype = {
 
         init : function () {
-            this.planets = [];
+
+            this.$el = $('[data-planets]');
+
+            this.planetTpl = this.$el.find('li').get(0).outerHTML;
+
+            this.$el.empty();
+
+            this.createPlanets();
+
+            this.render();
+        },
+
+        createPlanets : function () {
+
+            this.planetsInstances = [];
+
             this.model.planets.forEach(function (planetData) {
-                this.planets.push(new Planet(planetData));
+
+                var newPlanet = new Planet(planetData, $(this.planetTpl));
+
+                this.planetsInstances.push(newPlanet);
+
+
+
             }.bind(this));
-            console.dir(this.model);
+
         },
 
         render : function () {
+
+            this.planetsInstances.forEach(function (planet) {
+
+                this.$el.append(planet.$el);
+
+            }.bind(this));
 
         }
 
