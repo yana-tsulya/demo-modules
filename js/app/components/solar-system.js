@@ -9,7 +9,7 @@ define('components/solar-system', [
 ) {
 
     function SolarSystem () {
-        this.$el = $();
+        this.$el = $('main');
 
         this.model = {
             planets : [

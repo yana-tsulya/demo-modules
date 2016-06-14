@@ -1,7 +1,6 @@
 var gulp = require('gulp');
 var concat = require('gulp-concat');
 var minify = require('gulp-minify');
-var commonPath = 'src/AppBundle/Resources/public/js';
 
 gulp.task('default', ['watch']);
 
