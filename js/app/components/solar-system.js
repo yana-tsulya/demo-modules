@@ -64,28 +64,35 @@ define('components/solar-system', [
 
         init : function () {
 
+            $this = this;
+
             this.$el = $('[data-planets]');
 
             this.planetTpl = this.$el.find('li').get(0).outerHTML;
 
-            this.$el.empty();
+            this.startYear = 1;
 
-            this.createPlanets();
+            setInterval(function () {
+              $this.$el.empty();
 
-            this.render();
+              $this.createPlanets($this.startYear ++);
+
+              $this.render();
+            }, 300);
+
         },
 
-        createPlanets : function () {
+        createPlanets : function (i) {
 
             this.planetsInstances = [];
 
             this.model.planets.forEach(function (planetData) {
 
+                planetData.yearGone = i;
+
                 var newPlanet = new Planet(planetData, $(this.planetTpl));
 
                 this.planetsInstances.push(newPlanet);
-
-
 
             }.bind(this));
 
