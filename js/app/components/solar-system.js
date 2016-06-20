@@ -9,6 +9,10 @@ define('components/solar-system', [
 ) {
 
     function SolarSystem () {
+
+        this.startYear = 1;
+        this.renderInterval = 500;
+
         this.$el = $('main');
 
         this.model = {
@@ -64,31 +68,25 @@ define('components/solar-system', [
 
         init : function () {
 
-            $this = this;
-
             this.$el = $('[data-planets]');
 
             this.planetTpl = this.$el.find('li').get(0).outerHTML;
 
-            this.startYear = 1;
+            this.$el.empty();
 
-            setInterval(function () {
-              $this.$el.empty();
+            this.createPlanets();
 
-              $this.createPlanets($this.startYear ++);
+            this.render();
 
-              $this.render();
-            }, 300);
+            this.renderPlanetYears();
 
         },
 
-        createPlanets : function (i) {
+        createPlanets : function () {
 
             this.planetsInstances = [];
 
             this.model.planets.forEach(function (planetData) {
-
-                planetData.yearGone = i;
 
                 var newPlanet = new Planet(planetData, $(this.planetTpl));
 
@@ -106,8 +104,27 @@ define('components/solar-system', [
 
             }.bind(this));
 
-        }
+        },
 
+        renderPlanetYears : function () {
+
+          var yearTmpl,
+              i = this.startYear;
+
+          setInterval(function () {
+
+              this.planetsInstances.forEach(function (planet) {
+
+                  yearTmpl = this.$el.find('[data-planet=' + planet.model.name + ']').find('[data-times-around-sun]');
+
+                  yearTmpl.text(planet.getPlanetYear(i));
+
+              }.bind(this));
+
+              i++;
+
+          }.bind(this), this.renderInterval);
+        }
 
     };
 

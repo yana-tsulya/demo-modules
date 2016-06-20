@@ -12,8 +12,6 @@ define('components/planet', [
 
         this.model = data;
 
-        this.planetYear = Math.round(this.model.yearGone / this.model.year * 100) / 100;
-
         this.$el = $el;
 
         this.tpl = {
@@ -33,11 +31,20 @@ define('components/planet', [
 
         renderStatic : function () {
 
+            this.$el.attr('data-planet', this.model.name);
+
             this.tpl.name.text(this.model.name);
 
             this.tpl.distance.text(this.model.distance);
 
             this.tpl.timesAround.text(this.planetYear);
+
+        },
+
+        getPlanetYear : function (i) {
+
+            return Math.round(i / this.model.year * 100) / 100;
+
         }
 
     };
